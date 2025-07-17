@@ -9,4 +9,4 @@ function addItem(item) {
     inventory.appendChild(itemElement);
 }
 
-addButton.addEventListener("click", () => addItem("hi"));
+addButton.addEventListener("click", () => addItem(prompt("Enter item name:")));
