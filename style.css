@@ -2,45 +2,53 @@
     box-sizing: border-box;
 }
 
+@font-face {
+    font-family: Kaoly;
+    src: url(./fonts/Kaoly\ Demo-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: Leander;
+    src: url(./fonts/Leander.ttf) format('truetype');
+}
 
 #inventory {
     display: grid;
     width: 947px;
-    height: 488px;
-    row-gap: 10px;
+    row-gap: 20px;
     column-gap: 61px;
     flex-shrink: 0;
-    grid-template-rows: repeat(3, minmax(0, 1fr));
     grid-template-columns: repeat(3, minmax(0, 1fr));
     border-radius: 50px;
-    background: #ffffff;
+    background: #ffe9ec;
     align-items: center;
+    padding: 30px;
+    grid-auto-flow: row;
+    grid-auto-rows: auto;
 }
 
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #000;
+    background-color: #e0e2e7;
     width: 100vw;
     height: 100vh;
 }
 
 .item {
     display: inline-flex;
-    height: 76px;
+    height: auto;
+    min-height: 76px;
     min-width: 228px;
     max-width: 300px;
-    padding: 0px 57px;
     justify-content: center;
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
-    grid-row: 2 / span 1;
-    grid-column: 1 / span 1;
     justify-self: center;
     border-radius: 24px;
-    background: #928686;
+    background: #cf7f86;
 
     color: #000;
     text-align: center;
@@ -48,13 +56,14 @@ body {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    font-family: Leander, sans-serif;
 }
 
 #inventory h1 {
     grid-row: 1 / span 1;
-    grid-column: 1 / span 3;
+    grid-column: 1 / span 2;
     color: #000;
-    font-family: Inter;
+    font-family: Kaoly, sans-serif;
     font-size: 48px;
     font-style: normal;
     font-weight: 400;
