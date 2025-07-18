@@ -15,7 +15,7 @@
             <div class = "item"></div>
         </div>
         <dialog id = "item-editor">
-            <div id = "dialog">
+            <div class = "dialog">
             <h2>Add item info...</h2>
             <form id = "item-form" method="dialog">
                 <label for="item-name">Item Name:</label>
@@ -26,8 +26,12 @@
                 <br>
                 <button type="submit">Save</button>
                 <br>
-                <button type="reset">Cancel</button>
+                <button id = "rest" type="reset">Cancel</button>
             </form>
+            </div>
+        </dialog>
+        <dialog id = "item-viewer">
+            <div id = "item-info" class = "dialog">
             </div>
         </dialog>
         <script src="./main.js"></script>

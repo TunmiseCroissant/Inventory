@@ -72,7 +72,7 @@ body {
     width: 100%;
 }
 
-#dialog {
+.dialog {
     width: 30vw;
     height: 50vh;
     display: flex;
@@ -94,3 +94,6 @@ form button {
     margin: 0 auto;
 }
 
+#item-info {
+    gap: 1px;
+}
