@@ -28,12 +28,13 @@ form.addEventListener("submit", function (event) {
     event.preventDefault();
 
     const itemData = new FormData(form);
-    items[itemData.get("item-name")] = {
-        name: itemData.get('item-name'),
-        quanity: itemData.get('item-quantity'),
+    const data = {}
+    for ([key, value] of itemData) {
+        data[key] = value
     }
+    items[itemData.get("name")] = data;
     
-    addItem(itemData.get('item-name'));
+    addItem(itemData.get('name'));
     editor.close();
 })
 form.addEventListener("reset", () => {
