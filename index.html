@@ -12,7 +12,24 @@
             <div class = "item" id = "add-button"> + New item</div>
             <div class = "item"></div>
             <div class = "item"></div>
+            <div class = "item"></div>
         </div>
+        <dialog id = "item-editor">
+            <div id = "dialog">
+            <h2>Add item info...</h2>
+            <form id = "item-form" method="dialog">
+                <label for="item-name">Item Name:</label>
+                <input type="text" id="item-name" name="item-name" required>
+                <br>
+                <label for="item-quantity">Quantity:</label>
+                <input type="number" id="item-quantity" name="item-quantity" required>
+                <br>
+                <button type="submit">Save</button>
+                <br>
+                <button type="reset">Cancel</button>
+            </form>
+            </div>
+        </dialog>
         <script src="./main.js"></script>
         </body>
 </html>
