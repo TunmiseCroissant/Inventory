@@ -53,7 +53,11 @@ form.addEventListener("submit", function (event) {
     const itemData = new FormData(form);
     const data = {}
     for ([key, value] of itemData) {
-        data[key] = value
+        if (!value) {
+            data[key] = "none"
+        } else {
+            data[key] = value
+        }
     }
     items[itemData.get("name")] = data;
     addItem(itemData.get('name'));
