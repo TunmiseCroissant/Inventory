@@ -11,6 +11,7 @@ let AddPropBtn;
 let removeBTN;
 items = {}
 
+onLoad()
 
 function addItem(item) {
     if (!item) return;
@@ -30,6 +31,7 @@ function addItem(item) {
             viewer.close();
             inventory.removeChild(itemElement);
             delete items[item];
+            localStorage.setItem("items", JSON.stringify(items))
         })
     })
 }; 
@@ -58,6 +60,7 @@ form.addEventListener("submit", function (event) {
         }
     }
     items[itemData.get("name")] = data;
+    localStorage.setItem("items", JSON.stringify(items))
     addItem(itemData.get('name'));
     editor.close();
 })
@@ -96,3 +99,13 @@ function newProperty() {
         newPropBtn.addEventListener("click", newProperty)
     })
 } 
+
+function onLoad() {
+  const data = JSON.parse(localStorage.getItem("items")) || {};
+
+  for (const [key, value] of Object.entries(data)) {
+    items[key] = value;
+    addItem(key);
+  }
+}
+
