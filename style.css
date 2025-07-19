@@ -102,4 +102,14 @@ dialog {
     width: 30vw;
     min-width: 400px;
     height: 50vh;
+    border-radius: 30px;
+}
+
+dialog::backdrop {
+    background-color: black;
+    opacity: 30%;
+}
+
+h2 {
+    font-family: Kaoly, sans-serif;
 }
