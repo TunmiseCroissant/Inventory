@@ -8,6 +8,7 @@ let PropertyDiv = document.querySelector("#new-input");
 const Orginal_Form = document.querySelector("#item-form").innerHTML
 let newPropBtn;
 let AddPropBtn;
+let removeBTN;
 items = {}
 
 
@@ -17,12 +18,19 @@ function addItem(item) {
     itemElement.classList.add('item');
     itemElement.textContent = item;
     inventory.appendChild(itemElement);
+    
     form.reset();
     itemElement.addEventListener('click', () => {
         itemInfo.innerHTML = getInfo(item);
         viewer.showModal();
         infoCloseButton = document.querySelector("#close-button");
         infoCloseButton.addEventListener("click", () => viewer.close());
+        removeBTN = document.querySelector("#remove-button");
+        removeBTN.addEventListener("click", (event) => {
+            viewer.close();
+            inventory.removeChild(itemElement);
+            delete items.item;
+        })
     })
 }; 
 
@@ -58,7 +66,7 @@ function getInfo(item) {
     for (const [key, value] of Object.entries(items[item])) {
         returnString += `<h2>${key}:</h2> <p>${value}</p>`;
     }
-    returnString += `<br> <button id="close-button">Close</button>`;
+    returnString += `<br> <button id="close-button">Close</button> <br> <button id = "remove-button">Delete Item</button>`;
     return returnString;
 };
 
