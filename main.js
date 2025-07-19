@@ -72,7 +72,7 @@ function getInfo(item) {
         return;
     }
     for (const [key, value] of Object.entries(items[item])) {
-        returnString += `<h2>${key}:</h2> <p>${value}</p>`;
+        returnString += `<h3>${key}:</h3> <p>${value}</p>`;
     }
     returnString += `<br> <button id="close-button">Close</button> <br> <button id = "remove-button">Delete Item</button>`;
     return returnString;
