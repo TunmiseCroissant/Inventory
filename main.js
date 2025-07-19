@@ -29,7 +29,7 @@ function addItem(item) {
         removeBTN.addEventListener("click", (event) => {
             viewer.close();
             inventory.removeChild(itemElement);
-            delete items.item;
+            delete items[item];
         })
     })
 }; 
@@ -49,7 +49,6 @@ form.addEventListener("submit", function (event) {
         data[key] = value
     }
     items[itemData.get("name")] = data;
-    
     addItem(itemData.get('name'));
     editor.close();
 })
