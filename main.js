@@ -92,5 +92,7 @@ function newProperty() {
         event.preventDefault()
         document.querySelector("#new-properties").innerHTML += `<label for="${NewPropValue}:">${NewPropValue}:</label> <br> <input type="text" id="${NewPropValue}" name="${NewPropValue}"> <br> <br>`
         PropertyDiv.innerHTML = `<button id = "new-property">New property</button>`
+        newPropBtn = document.querySelector("#new-property")
+        newPropBtn.addEventListener("click", newProperty)
     })
 } 
