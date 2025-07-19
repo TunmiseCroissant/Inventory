@@ -84,7 +84,6 @@ form {
     display: flex;
     flex-direction: column;
     width: 30%;
-    height: 100%;
     gap: 10px;
     text-align: center;
 }
@@ -97,3 +96,4 @@ form button {
 #item-info {
     gap: 1px;
 }
+

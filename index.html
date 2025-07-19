@@ -16,15 +16,22 @@
             <h2>Add item info...</h2>
             <form id = "item-form" method="dialog">
                 <label for="name">Item Name:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name">
                 <br>
                 <label for="quantity">Quantity:</label>
-                <input type="number" id="quantity" name="quantity" required>
+                <input type="number" id="quantity" name="quantity">
                 <br>
-                <button type="submit">Save</button>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description"></textarea>
+                <span id = "new-properties"></span>
+                <button type = "submit">Save</button>
                 <br>
                 <button id = "rest" type="reset">Cancel</button>
             </form>
+            <br>
+            <div id = "new-input">
+                <button id = "new-property">New property</button>
+            </div>
             </div>
         </dialog>
         <dialog id = "item-viewer">
