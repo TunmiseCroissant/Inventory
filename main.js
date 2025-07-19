@@ -43,6 +43,12 @@ addButton.addEventListener("click", () => {
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
+    let name = document.querySelector("#name").value
+
+    if (items.hasOwnProperty(name)) {
+        return;
+    }
+
     const itemData = new FormData(form);
     const data = {}
     for ([key, value] of itemData) {
