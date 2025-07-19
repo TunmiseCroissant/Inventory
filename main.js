@@ -53,9 +53,7 @@ form.addEventListener("submit", function (event) {
     const itemData = new FormData(form);
     const data = {}
     for ([key, value] of itemData) {
-        if (!value) {
-            data[key] = "none"
-        } else {
+        if (value) {
             data[key] = value
         }
     }
