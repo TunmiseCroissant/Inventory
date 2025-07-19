@@ -1,3 +1,10 @@
+:root {
+    --light-blue: #e0e2e7;
+    --light-pink: #ffe9ec;
+    --dark-pink: #cf7f86;
+}
+
+
 * {
     box-sizing: border-box;
 }
@@ -22,7 +29,7 @@
     grid-template-columns: repeat(3, minmax(20px, 1fr));
     grid-template-rows: repeat(auto-fit, minmax(1px, 1fr));
     border-radius: 50px;
-    background: #ffe9ec;
+    background: var(--light-pink);
     align-items: center;
     padding: 30px;
     grid-auto-flow: row;
@@ -33,7 +40,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e0e2e7;
+    background-color: var(--light-blue);
     width: 100vw;
     height: 100vh;
 }
@@ -50,7 +57,7 @@ body {
     flex-shrink: 0;
     justify-self: center;
     border-radius: 24px;
-    background: #cf7f86;
+    background: var(--dark-pink);
 
     color: #000;
     text-align: center;
