@@ -43,9 +43,10 @@ addButton.addEventListener("click", () => {
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    let name = document.querySelector("#name").value
+    let name = document.querySelector("#name")
 
-    if (items.hasOwnProperty(name)) {
+    if (items.hasOwnProperty(name.value)) {
+        name.value = "Can not have duplicate items!"
         return;
     }
 
