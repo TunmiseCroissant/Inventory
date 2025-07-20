@@ -1,0 +1,25 @@
+{
+  "name": "inventoryapp",
+  "version": "1.0.0",
+  "description": "Hello! Please keep in mind I am a highschooler still learing how to code, so there will be lots of mistakes! This is just a simple inventory app.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TunmiseCroissant/Inventory.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TunmiseCroissant/Inventory/issues"
+  },
+  "homepage": "https://github.com/TunmiseCroissant/Inventory#readme",
+  "devDependencies": {
+    "electron": "^37.2.3",
+    "electron-packager": "^17.1.2"
+  }
+}
