@@ -1,6 +1,6 @@
 const inventory = document.querySelector('#inventory');
 const addButton = document.querySelector('#add-button');
-const editor = document.querySelector("#item-editor");
+const creator = document.querySelector("#item-creator");
 const form = document.querySelector("#item-form");
 const viewer = document.querySelector("#item-viewer");
 const itemInfo = document.querySelector("#item-info");
@@ -37,7 +37,7 @@ function addItem(item) {
 }; 
 
 addButton.addEventListener("click", () => {
-    editor.showModal()
+    creator.showModal()
     document.querySelector("#item-form").innerHTML = Orginal_Form
     newPropBtn = document.querySelector("#new-property")
     newPropBtn.addEventListener("click", newProperty)
@@ -45,7 +45,7 @@ addButton.addEventListener("click", () => {
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    let name = document.querySelector("#name")
+    let name = document.querySelector("#Name")
 
     if (items.hasOwnProperty(name.value)) {
         name.value = "Can not have duplicate items!"
@@ -59,13 +59,13 @@ form.addEventListener("submit", function (event) {
             data[key] = value
         }
     }
-    items[itemData.get("name")] = data;
+    items[itemData.get("Name")] = data;
     localStorage.setItem("items", JSON.stringify(items))
-    addItem(itemData.get('name'));
-    editor.close();
+    addItem(itemData.get('Name'));
+    creator.close();
 })
 form.addEventListener("reset", () => {
-    editor.close();
+    creator.close();
     form.reset();
 });
 
