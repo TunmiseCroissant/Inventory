@@ -89,16 +89,18 @@ function newProperty() {
         let NewPropValue = document.querySelector("#new").value
         const newProp = document.querySelector("#new-properties")
         if (!NewPropValue) {
-            PropertyDiv.innerHTML = `<button id = "new-property">New property</button>`
-            return
+            PropertyDiv.innerHTML = `<button id = "new-property">New property</button>`;
+            newPropBtn = document.querySelector("#new-property");
+            newPropBtn.addEventListener("click", newProperty);
+            return;
         }
         event.preventDefault()
-        document.querySelector("#new-properties").innerHTML += `<label for="${NewPropValue}:">${NewPropValue}:</label> <br> <input type="text" id="${NewPropValue}" name="${NewPropValue}"> <br> <br>`
-        PropertyDiv.innerHTML = `<button id = "new-property">New property</button>`
-        newPropBtn = document.querySelector("#new-property")
-        newPropBtn.addEventListener("click", newProperty)
+        createProp(NewPropValue)
+        PropertyDiv.innerHTML = `<button id = "new-property">New property</button>`;
+        newPropBtn = document.querySelector("#new-property");
+        newPropBtn.addEventListener("click", newProperty);
     })
-} 
+};
 
 function onLoad() {
   const data = JSON.parse(localStorage.getItem("items")) || {};
@@ -107,5 +109,10 @@ function onLoad() {
     items[key] = value;
     addItem(key);
   }
-}
+};
 
+function createProp (NewPropValue) {
+   const prop = document.createElement("div");
+   prop.innerHTML = `<label for="${NewPropValue}:">${NewPropValue}:</label> <br> <input type="text" id="${NewPropValue}" name="${NewPropValue}"> <br> <br>`
+   document.querySelector("#new-properties").appendChild(prop);
+}
