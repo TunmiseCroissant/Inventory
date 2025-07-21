@@ -52,7 +52,7 @@ function editItem(item, itemElement) {
     console.log(item)
     let name = items[item]["Name"]
     editor.showModal()
-    let HTMLstring = `<h2>Editing ${name}</h2> <form id = "editor-form" method = "dialog">`
+    let HTMLstring = `<h2>Editing ${name}</h2> <h4>(Any blank properties will be ignored)</h4> <form id = "editor-form" method = "dialog">`
     if (!items[item]) {
         return;
     };
