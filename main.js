@@ -55,9 +55,11 @@ function editItem(item, itemElement) {
         return;
     };
     for (const [key, value] of Object.entries(items[item])) {
-        if (typeof value === "number") {
+        if (key === "Name") {
+            HTMLstring += `<label for="${key}:">${key}:</label> <br> <input type="text" id="${key}" name="${key}" value="${value}" required> <br>`
+        } else if (typeof value === "number") {
             HTMLstring += `<label for="${key}:">${key}:</label> <br> <input type="number" id="${key}" name="${key}" value="${value}"> <br>`
-        } if (typeof value === "string") {
+        } else if (typeof value === "string") {
             HTMLstring += `<label for="${key}:">${key}:</label> <br> <input type="text" id="${key}" name="${key}" value="${value}"> <br>`
         }
     };
