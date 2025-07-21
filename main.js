@@ -21,7 +21,7 @@ function addItem(item) {
     if (!item) return;
     const itemElement = document.createElement('div');
     itemElement.classList.add('item');
-    itemElement.textContent = items[item]["Name"];
+    itemElement.textContent = shorten(items[item]["Name"]);
     inventory.appendChild(itemElement);
     
     form.reset();
@@ -97,7 +97,7 @@ function editItem(item, itemElement) {
         console.log(item)
         localStorage.setItem("items", JSON.stringify(items))
         itemInfo.innerHTML = getInfo(item);
-        itemElement.textContent = items[item]["Name"]
+        itemElement.textContent = shorten(items[item]["Name"])
         editor.close()
         resetBTNs(item, itemElement)
     })
@@ -220,4 +220,12 @@ function createProp (NewPropValue, div) {
    const prop = document.createElement("div");
    prop.innerHTML = `<label for="${NewPropValue}:">${NewPropValue}:</label> <br> <input type="text" id="${NewPropValue}" name="${NewPropValue}"> <br> <br>`
    document.querySelector(div).appendChild(prop);
+}
+
+function shorten(word) {
+    if (word.length > 49) {
+    return word.slice(0, 46) + "..."
+    } else {
+        return word
+    }
 }
