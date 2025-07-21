@@ -58,11 +58,11 @@ function editItem(item, itemElement) {
     };
     for (const [key, value] of Object.entries(items[item])) {
         if (key === "Name") {
-            HTMLstring += `<label for="${key}:">${key}:</label> <input type="text" id="${key}" name="${key}" value="${value}" required> <br>`
+            HTMLstring += `<label for="${key}:">${key}:</label> <input type="text" id="Edit-Name" name="${key}" value="${value}" required>`
         } else if (typeof value === "number") {
-            HTMLstring += `<label for="${key}:">${key}:</label> <input type="number" id="${key}" name="${key}" value="${value}"> <br>`
+            HTMLstring += `<br> <label for="${key}:">${key}:</label> <input type="number" id="${key}" name="${key}" value="${value}">`
         } else if (typeof value === "string") {
-            HTMLstring += `<label for="${key}:">${key}:</label> <input type="text" id="${key}" name="${key}" value="${value}"> <br>`
+            HTMLstring += `<br> <label for="${key}:">${key}:</label> <input type="text" id="${key}" name="${key}" value="${value}">`
         }
     };
     HTMLstring += `<span id = "new-editor-props"></span> <button id = "save-edits">Save</button> <button id = "close-editor">Cancel</button> </form> <br> <div id = "add-div"> <button id = "add-editor-property">New property</button> </div>`;
@@ -80,7 +80,12 @@ function editItem(item, itemElement) {
     });
     EditorForm.addEventListener("submit", (event) => {
         event.preventDefault();
-        
+        let NameInput = document.querySelector("#Edit-Name")
+        console.log(NameInput.value)
+        if (!NameInput.value || !NameInput.value.trim()) {
+            NameInput.value = "Please enter a valid name!"
+            return;
+        }
         let data = {}
         const NewData = new FormData(EditorForm);
         for (const [key, value] of NewData) {
@@ -123,6 +128,9 @@ form.addEventListener("submit", function (event) {
     if (items.hasOwnProperty(name.value)) {
         name.value = "Can not have duplicate items!"
         return;
+    } else if (name.value.trim() === "") {
+        name.value = "Please enter a valid name!"
+        return
     }
 
     const itemData = new FormData(form);
@@ -161,7 +169,7 @@ function newProperty() {
     AddPropBtn.addEventListener("click", function (event) {
         let NewPropValue = document.querySelector("#new").value
         const newProp = document.querySelector("#new-properties")
-        if (!NewPropValue) {
+        if (!NewPropValue || !NewPropValue.trim()) {
             PropertyDiv.innerHTML = `<button id = "new-property">New property</button>`;
             newPropBtn = document.querySelector("#new-property");
             newPropBtn.addEventListener("click", newProperty);
@@ -181,7 +189,7 @@ function addPropToEditor(addDiv) {
     EditorNewBTN.addEventListener("click", function (event) {
         let NewPropValue = document.querySelector("#newProp").value
         const newProp = document.querySelector("#new-properties")
-        if (!NewPropValue) {
+        if (!NewPropValue || !NewPropValue.trim()) {
             addDiv.innerHTML = `<button id = "add-editor-property">New property</button>`;
             EditorAddBTN = document.querySelector("#add-editor-property");
             EditorAddBTN.addEventListener("click", () => {
