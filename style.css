@@ -145,3 +145,17 @@ h2 {
 h3 {
     margin: 0;
 }
+
+form span {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    text-align: center;
+}
+
+form span input {
+    width: 100%;
+    margin-top: 5px;
+}

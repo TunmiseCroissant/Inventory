@@ -7,6 +7,8 @@ const itemInfo = document.querySelector("#item-info");
 let PropertyDiv = document.querySelector("#new-input");
 const Orginal_Form = document.querySelector("#item-form").innerHTML
 const editor = document.querySelector("#item-editor")
+let EditorAddBTN;
+let EditorNewBTN;
 let newPropBtn;
 let AddPropBtn;
 let removeBTN;
@@ -56,15 +58,20 @@ function editItem(item, itemElement) {
     };
     for (const [key, value] of Object.entries(items[item])) {
         if (key === "Name") {
-            HTMLstring += `<label for="${key}:">${key}:</label> <br> <input type="text" id="${key}" name="${key}" value="${value}" required> <br>`
+            HTMLstring += `<label for="${key}:">${key}:</label> <input type="text" id="${key}" name="${key}" value="${value}" required> <br>`
         } else if (typeof value === "number") {
-            HTMLstring += `<label for="${key}:">${key}:</label> <br> <input type="number" id="${key}" name="${key}" value="${value}"> <br>`
+            HTMLstring += `<label for="${key}:">${key}:</label> <input type="number" id="${key}" name="${key}" value="${value}"> <br>`
         } else if (typeof value === "string") {
-            HTMLstring += `<label for="${key}:">${key}:</label> <br> <input type="text" id="${key}" name="${key}" value="${value}"> <br>`
+            HTMLstring += `<label for="${key}:">${key}:</label> <input type="text" id="${key}" name="${key}" value="${value}"> <br>`
         }
     };
-    HTMLstring += `<button id = "save-edits">Save</button> <br> <button id = "close-editor">Cancel</button> </form>`;
+    HTMLstring += `<span id = "new-editor-props"></span> <button id = "save-edits">Save</button> <button id = "close-editor">Cancel</button> </form> <br> <div id = "add-div"> <button id = "add-editor-property">New property</button> </div>`;
     document.querySelector("#editor").innerHTML = HTMLstring;
+    let addDiv = document.querySelector("#add-div")
+    EditorAddBTN = document.querySelector("#add-editor-property")
+    EditorAddBTN.addEventListener("click", () => {
+        addPropToEditor(addDiv)
+    })
     let EditorForm = document.querySelector("#editor-form")
     document.querySelector("#close-editor").addEventListener("click", () => {
         editor.close()
@@ -161,12 +168,36 @@ function newProperty() {
             return;
         }
         event.preventDefault()
-        createProp(NewPropValue)
+        createProp(NewPropValue, "#new-properties")
         PropertyDiv.innerHTML = `<button id = "new-property">New property</button>`;
         newPropBtn = document.querySelector("#new-property");
         newPropBtn.addEventListener("click", newProperty);
     })
 };
+
+function addPropToEditor(addDiv) {
+    addDiv.innerHTML = '<label for="new">New Property:</label> <input type="text" id="newProp" name="newProp" required> <button id = "newProperty">Add</button>'
+    EditorNewBTN = document.querySelector("#newProperty")
+    EditorNewBTN.addEventListener("click", function (event) {
+        let NewPropValue = document.querySelector("#newProp").value
+        const newProp = document.querySelector("#new-properties")
+        if (!NewPropValue) {
+            addDiv.innerHTML = `<button id = "add-editor-property">New property</button>`;
+            EditorAddBTN = document.querySelector("#add-editor-property");
+            EditorAddBTN.addEventListener("click", () => {
+                addPropToEditor(addDiv)
+            });
+            return;
+        }
+        event.preventDefault()
+        createProp(NewPropValue, "#new-editor-props")
+        addDiv.innerHTML = `<button id = "add-editor-property">New property</button>`;
+        EditorAddBTN = document.querySelector("#add-editor-property");
+        EditorAddBTN.addEventListener("click", () => {
+                addPropToEditor(addDiv)
+        });
+    })
+}
 
 function onLoad() {
   const data = JSON.parse(localStorage.getItem("items")) || {};
@@ -177,8 +208,8 @@ function onLoad() {
   }
 };
 
-function createProp (NewPropValue) {
+function createProp (NewPropValue, div) {
    const prop = document.createElement("div");
    prop.innerHTML = `<label for="${NewPropValue}:">${NewPropValue}:</label> <br> <input type="text" id="${NewPropValue}" name="${NewPropValue}"> <br> <br>`
-   document.querySelector("#new-properties").appendChild(prop);
+   document.querySelector(div).appendChild(prop);
 }
