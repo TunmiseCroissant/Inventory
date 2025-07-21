@@ -66,6 +66,11 @@ body {
     font-weight: 400;
     line-height: normal;
     font-family: Leander, sans-serif;
+
+    word-break: break-word;
+    flex-wrap: wrap;
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 
 #inventory h1 {
