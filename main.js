@@ -18,15 +18,19 @@ items = {}
 onLoad()
 
 function addItem(item) {
+    console.log(items[item]["Name"])
     if (!item) return;
     const itemElement = document.createElement('div');
     itemElement.classList.add('item');
     itemElement.innerHTML += `<input type="checkbox" id="${items[item]["Name"]}-check" name="${items[item]["Name"]}" value="checked">`;
     itemElement.innerHTML += `<div id = "${items[item]["Name"]}-clickBox">${shorten(items[item]["Name"])}</div>`;
     inventory.appendChild(itemElement);
+
     
-    let NameClick = document.querySelector(`#${items[item]["Name"]}-clickBox`);
-    let checkBox = document.querySelector(`#${items[item]["Name"]}-check`)
+    let NameClick = document.getElementById(`${items[item]["Name"]}-clickBox`);
+    let checkBox = document.getElementById(`${items[item]["Name"]}-check`)
+
+    console.log(NameClick)
 
     checkBox.checked = items[item]["checked"]
     strikeThrough(NameClick, items[item]["checked"])
@@ -162,9 +166,9 @@ form.addEventListener("submit", function (event) {
 
     data["checked"] = false
 
-    items[itemData.get("Name")] = data;
+    items[(itemData.get("Name")).replace(/\s+/g, "-")] = data;
     localStorage.setItem("items", JSON.stringify(items))
-    addItem(itemData.get('Name'));
+    addItem((itemData.get("Name")).replace(/\s+/g, "-"));
     creator.close();
 })
 form.addEventListener("reset", () => {
