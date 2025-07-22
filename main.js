@@ -18,7 +18,6 @@ items = {}
 onLoad()
 
 function addItem(item) {
-    console.log(items[item]["Name"])
     if (!item) return;
     const itemElement = document.createElement('div');
     itemElement.classList.add('item');
@@ -30,7 +29,6 @@ function addItem(item) {
     let NameClick = document.getElementById(`${items[item]["Name"]}-clickBox`);
     let checkBox = document.getElementById(`${items[item]["Name"]}-check`)
 
-    console.log(NameClick)
 
     checkBox.checked = items[item]["checked"]
     strikeThrough(NameClick, items[item]["checked"])
@@ -39,13 +37,11 @@ function addItem(item) {
         items[item]["checked"] = checkBox.checked;
         localStorage.setItem("items", JSON.stringify(items))
         strikeThrough(NameClick, items[item]["checked"])
-        console.log(items[item])
     })
 
     form.reset();
     NameClick.addEventListener('click', () => {
         resetBTNs(item, itemElement, NameClick)
-        console.log(item)
     })
 }; 
 
@@ -61,13 +57,11 @@ function resetBTNs(item, itemElement, NameClick) {
         editBTN = document.querySelector("#edit-button")
         editBTN.addEventListener("click", () => {
             editItem(item, itemElement, NameClick)
-            console.log(item)
         })
 }
 
 
 function editItem(item, itemElement, NameClick) {
-    console.log(item)
     let name = items[item]["Name"]
     editor.showModal()
     let HTMLstring = `<h2>Editing ${name}</h2> <h4>(Any blank properties will be ignored)</h4> <form id = "editor-form" method = "dialog">`
@@ -99,7 +93,6 @@ function editItem(item, itemElement, NameClick) {
     EditorForm.addEventListener("submit", (event) => {
         event.preventDefault();
         let NameInput = document.querySelector("#Edit-Name")
-        console.log(NameInput.value)
         if (!NameInput.value || !NameInput.value.trim()) {
             NameInput.value = "Please enter a valid name!"
             return;
@@ -112,12 +105,10 @@ function editItem(item, itemElement, NameClick) {
             }
         }
 
-        console.log(items[item]["checked"]);
 
         data["checked"] = items[item]["checked"]
 
         items[item] = data;
-        console.log(item)
         localStorage.setItem("items", JSON.stringify(items))
         itemInfo.innerHTML = getInfo(item);
         NameClick.innerHTML = shorten(items[item]["Name"])
@@ -134,7 +125,6 @@ function remove(item, itemElement) {
     inventory.removeChild(itemElement);
     delete items[item];
     localStorage.setItem("items", JSON.stringify(items))
-    console.log(items)
 }
 
 addButton.addEventListener("click", () => {
