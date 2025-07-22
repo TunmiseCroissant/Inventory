@@ -52,7 +52,16 @@ function resetBTNs(item, itemElement, NameClick) {
         infoCloseButton.addEventListener("click", () => viewer.close());
         removeBTN = document.querySelector("#remove-button");
         removeBTN.addEventListener("click", () => {
-            remove(item, itemElement)
+            let deleteModal = document.querySelector("#delete")
+            deleteModal.showModal()
+            document.querySelector("#delete-text").innerHTML = `<h2>Are you sure you want to delete ${item}?</h2> (WARNING: This action can not be undone!)`
+            document.querySelector("#confirm-delete").addEventListener("click", () => {
+                remove(item, itemElement)
+                deleteModal.close()
+            })
+            document.querySelector("#cancel-delete").addEventListener("click", () => {
+                deleteModal.close()
+            })
         })
         editBTN = document.querySelector("#edit-button")
         editBTN.addEventListener("click", () => {
