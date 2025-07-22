@@ -177,3 +177,7 @@ h4 {
     min-width: none;
   }
 }
+
+.item:hover {
+  cursor: pointer;
+}
