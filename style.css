@@ -169,3 +169,11 @@ form span input {
 h4 {
     margin-top: 0;
 }
+
+
+@media only screen and (max-width: 480px) {
+  #inventory {
+    grid-template-columns: repeat(3, minmax(20px, 1fr));
+    min-width: none;
+  }
+}
