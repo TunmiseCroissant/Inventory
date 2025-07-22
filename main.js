@@ -21,17 +21,31 @@ function addItem(item) {
     if (!item) return;
     const itemElement = document.createElement('div');
     itemElement.classList.add('item');
-    itemElement.textContent = shorten(items[item]["Name"]);
+    itemElement.innerHTML += `<input type="checkbox" id="${items[item]["Name"]}-check" name="${items[item]["Name"]}" value="checked">`;
+    itemElement.innerHTML += `<div id = "${items[item]["Name"]}-clickBox">${shorten(items[item]["Name"])}</div>`;
     inventory.appendChild(itemElement);
     
+    let NameClick = document.querySelector(`#${items[item]["Name"]}-clickBox`);
+    let checkBox = document.querySelector(`#${items[item]["Name"]}-check`)
+
+    checkBox.checked = items[item]["checked"]
+    strikeThrough(NameClick, items[item]["checked"])
+
+    checkBox.addEventListener("change", () => {
+        items[item]["checked"] = checkBox.checked;
+        localStorage.setItem("items", JSON.stringify(items))
+        strikeThrough(NameClick, items[item]["checked"])
+        console.log(items[item])
+    })
+
     form.reset();
-    itemElement.addEventListener('click', () => {
-        resetBTNs(item, itemElement)
+    NameClick.addEventListener('click', () => {
+        resetBTNs(item, itemElement, NameClick)
         console.log(item)
     })
 }; 
 
-function resetBTNs(item, itemElement) {
+function resetBTNs(item, itemElement, NameClick) {
     itemInfo.innerHTML = getInfo(item);
         viewer.showModal();
         infoCloseButton = document.querySelector("#close-button");
@@ -42,13 +56,13 @@ function resetBTNs(item, itemElement) {
         })
         editBTN = document.querySelector("#edit-button")
         editBTN.addEventListener("click", () => {
-            editItem(item, itemElement)
+            editItem(item, itemElement, NameClick)
             console.log(item)
         })
 }
 
 
-function editItem(item, itemElement) {
+function editItem(item, itemElement, NameClick) {
     console.log(item)
     let name = items[item]["Name"]
     editor.showModal()
@@ -93,13 +107,18 @@ function editItem(item, itemElement) {
                 data[key] = value
             }
         }
+
+        console.log(items[item]["checked"]);
+
+        data["checked"] = items[item]["checked"]
+
         items[item] = data;
         console.log(item)
         localStorage.setItem("items", JSON.stringify(items))
         itemInfo.innerHTML = getInfo(item);
-        itemElement.textContent = shorten(items[item]["Name"])
+        NameClick.innerHTML = shorten(items[item]["Name"])
         editor.close()
-        resetBTNs(item, itemElement)
+        resetBTNs(item, itemElement, NameClick)
     })
 
 }
@@ -140,6 +159,9 @@ form.addEventListener("submit", function (event) {
             data[key] = value
         }
     }
+
+    data["checked"] = false
+
     items[itemData.get("Name")] = data;
     localStorage.setItem("items", JSON.stringify(items))
     addItem(itemData.get('Name'));
@@ -228,4 +250,8 @@ function shorten(word) {
     } else {
         return word
     }
+}
+
+function strikeThrough(div, strike) {
+    div.style.textDecoration = strike ? "line-through" : "none";
 }
