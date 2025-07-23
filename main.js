@@ -54,7 +54,7 @@ function resetBTNs(item, itemElement, NameClick) {
         removeBTN.addEventListener("click", () => {
             let deleteModal = document.querySelector("#delete")
             deleteModal.showModal()
-            document.querySelector("#delete-text").innerHTML = `<h2>Are you sure you want to delete ${item}?</h2> (WARNING: This action can not be undone!)`
+            document.querySelector("#delete-text").innerHTML = `<h2>Are you sure you want to delete ${items[item]["Name"]}?</h2> (WARNING: This action can not be undone!)`
             document.querySelector("#confirm-delete").addEventListener("click", () => {
                 remove(item, itemElement)
                 deleteModal.close()
