@@ -1,6 +1,6 @@
 {
   "name": "inventoryapp",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Hello! Please keep in mind I am a highschooler still learing how to code, so there will be lots of mistakes! This is just a simple inventory app.",
   "main": "script.js",
   "scripts": {
