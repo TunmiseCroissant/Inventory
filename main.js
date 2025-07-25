@@ -1,3 +1,4 @@
+// Intiate variables
 const inventory = document.querySelector('#inventory');
 const addButton = document.querySelector('#add-button');
 const creator = document.querySelector("#item-creator");
@@ -14,59 +15,63 @@ let AddPropBtn;
 let removeBTN;
 let editBTN;
 items = {}
+// Variables intiaed!
 
-onLoad()
+onLoad() // load all items from storage when the program is run
 
-function addItem(item) {
-    if (!item) return;
+function addItem(item) { // called when the user submits the item creator form
+    if (!item) return; // If the item was somehow not created
+    // create the item div
     const itemElement = document.createElement('div');
     itemElement.classList.add('item');
     itemElement.innerHTML += `<input type="checkbox" id="${items[item]["Name"]}-check" name="${items[item]["Name"]}" value="checked">`;
     itemElement.innerHTML += `<div id = "${items[item]["Name"]}-clickBox">${shorten(items[item]["Name"])}</div>`;
     inventory.appendChild(itemElement);
 
-    
+    // seperates the clickable area from the checkbox
     let NameClick = document.getElementById(`${items[item]["Name"]}-clickBox`);
     let checkBox = document.getElementById(`${items[item]["Name"]}-check`)
 
-
+    // if the item was checked when the website closed, check it now
     checkBox.checked = items[item]["checked"]
-    strikeThrough(NameClick, items[item]["checked"])
+    strikeThrough(NameClick, items[item]["checked"]) // if the item is checked, strikethough the text
 
-    checkBox.addEventListener("change", () => {
+    checkBox.addEventListener("change", () => { // whenever the checkbox is clicked, update the item
         items[item]["checked"] = checkBox.checked;
         localStorage.setItem("items", JSON.stringify(items))
         strikeThrough(NameClick, items[item]["checked"])
     })
 
     form.reset();
-    NameClick.addEventListener('click', () => {
+    NameClick.addEventListener('click', () => { //when the item is clicked
         resetBTNs(item, itemElement, NameClick)
     })
 }; 
 
 function resetBTNs(item, itemElement, NameClick) {
     itemInfo.innerHTML = getInfo(item);
-        viewer.showModal();
-        infoCloseButton = document.querySelector("#close-button");
-        infoCloseButton.addEventListener("click", () => viewer.close());
-        removeBTN = document.querySelector("#remove-button");
-        removeBTN.addEventListener("click", () => {
-            let deleteModal = document.querySelector("#delete")
-            deleteModal.showModal()
-            document.querySelector("#delete-text").innerHTML = `<h2>Are you sure you want to delete ${items[item]["Name"]}?</h2> (WARNING: This action can not be undone!)`
-            document.querySelector("#confirm-delete").addEventListener("click", () => {
-                remove(item, itemElement)
-                deleteModal.close()
-            })
-            document.querySelector("#cancel-delete").addEventListener("click", () => {
-                deleteModal.close()
-            })
+    viewer.showModal();
+    // reset the buttons event listeners
+    infoCloseButton = document.querySelector("#close-button");
+    infoCloseButton.addEventListener("click", () => viewer.close());
+    removeBTN = document.querySelector("#remove-button");
+    removeBTN.addEventListener("click", () => {
+        // confirm the user wants to delete
+        let deleteModal = document.querySelector("#delete")
+        deleteModal.showModal()
+        document.querySelector("#delete-text").innerHTML = `<h2>Are you sure you want to delete ${items[item]["Name"]}?</h2> (WARNING: This action can not be undone!)`
+        document.querySelector("#confirm-delete").addEventListener("click", () => {
+            remove(item, itemElement)
+            deleteModal.close()
         })
-        editBTN = document.querySelector("#edit-button")
-        editBTN.addEventListener("click", () => {
-            editItem(item, itemElement, NameClick)
+        document.querySelector("#cancel-delete").addEventListener("click", () => {
+            deleteModal.close()
         })
+    })
+    editBTN = document.querySelector("#edit-button")
+    editBTN.addEventListener("click", () => {
+        editItem(item, itemElement, NameClick)
+    })
 }
 
 
@@ -77,6 +82,7 @@ function editItem(item, itemElement, NameClick) {
     if (!items[item]) {
         return;
     };
+    // for every item property (expect for checked), create a form with the values filled in
     for (const [key, value] of Object.entries(items[item])) {
         if (key === "Name") {
             HTMLstring += `<label for="${key}:">${key}:</label> <input type="text" id="Edit-Name" name="${key}" value="${value}" required>`
