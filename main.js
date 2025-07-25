@@ -24,14 +24,12 @@ function addItem(item) { // called when the user submits the item creator form
     // create the item div
     const itemElement = document.createElement('div');
     itemElement.classList.add('item');
-    itemElement.innerHTML += `<input type="checkbox" id="${items[item]["Name"]}-check" name="${items[item]["Name"]}" value="checked">`;
-    itemElement.innerHTML += `<div id = "${items[item]["Name"]}-clickBox">${shorten(items[item]["Name"])}</div>`;
+    itemElement.innerHTML += `<input type="checkbox" id="${item}-check" name="${items[item]["Name"]}" value="checked">`;
+    itemElement.innerHTML += `<div id = "${item}-clickBox">${shorten(items[item]["Name"])}</div>`;
     inventory.appendChild(itemElement);
-
     // seperates the clickable area from the checkbox
-    let NameClick = document.getElementById(`${items[item]["Name"]}-clickBox`);
-    let checkBox = document.getElementById(`${items[item]["Name"]}-check`)
-
+    let NameClick = document.getElementById(`${item}-clickBox`);
+    let checkBox = document.getElementById(`${item}-check`)
     // if the item was checked when the website closed, check it now
     checkBox.checked = items[item]["checked"]
     strikeThrough(NameClick, items[item]["checked"]) // if the item is checked, strikethough the text
@@ -157,11 +155,8 @@ form.addEventListener("submit", function (event) {
 
     let name = document.querySelector("#Name")
     
-    // makes sure there are no duplicate items (really just to prevent errors)
-    if (items.hasOwnProperty(name.value)) {
-        name.value = "Can not have duplicate items!"
-        return;
-    } else if (name.value.trim() === "") {
+    // makes sure the user didnt just enter spaces
+    if (name.value.trim() === "") {
         name.value = "Please enter a valid name!"
         return
     }
@@ -176,9 +171,21 @@ form.addEventListener("submit", function (event) {
 
     data["checked"] = false
 
-    items[(itemData.get("Name"))] = data;
+    // code to allow duplicate items
+    let baseName = itemData.get("Name");
+    let newName = baseName;
+    let counter = 0;
+
+    // Keep checking until we find an unused name
+    while (items.hasOwnProperty(newName)) {
+        newName = baseName + counter;
+        counter++;
+    }
+
+
+    items[newName] = data;
     localStorage.setItem("items", JSON.stringify(items))
-    addItem((itemData.get("Name")));
+    addItem(newName);
     creator.close();
 })
 form.addEventListener("reset", () => {
