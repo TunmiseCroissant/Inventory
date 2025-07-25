@@ -2,7 +2,7 @@
     --light-blue: #e0e2e7;
     --light-pink: #ffe9ec;
     --dark-pink: #cf7f86;
-}
+} /* Variables for the inventory*/
 
 
 * {
@@ -124,7 +124,7 @@ dialog[open] {
     opacity: 1;
 }
 
-@starting-style {
+@starting-style { /* Starting styles used to that dialogs have transitions */
     dialog[open] {
         opacity: 0;
     }
@@ -171,7 +171,7 @@ h4 {
 }
 
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 480px) { /* CSS for phones (currently doesnt work) */
   #inventory {
     grid-template-columns: repeat(3, minmax(20px, 1fr));
     min-width: none;
