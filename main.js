@@ -110,10 +110,11 @@ function editItem(item, itemElement, NameClick) {
     EditorForm.addEventListener("submit", (event) => {
         event.preventDefault();
         let NameInput = document.querySelector("#Edit-Name")
-        if (!NameInput.value || !NameInput.value.trim()) { // Makes sure the user doesnt enter all spaces
+        if (!NameInput.value || !NameInput.value.trim()) { // Makes sure the user doesnt enter all spaces or blanks
             NameInput.value = "Please enter a valid name!"
             return;
         }
+        // sets the new data to the item
         let data = {}
         const NewData = new FormData(EditorForm);
         for (const [key, value] of NewData) {
@@ -122,13 +123,11 @@ function editItem(item, itemElement, NameClick) {
             }
         }
 
-
         data["checked"] = items[item]["checked"]
-
         items[item] = data;
         localStorage.setItem("items", JSON.stringify(items))
         itemInfo.innerHTML = getInfo(item);
-        NameClick.innerHTML = shorten(items[item]["Name"])
+        NameClick.innerHTML = shorten(items[item]["Name"]) // sets the item div to have the new name
         editor.close()
         resetBTNs(item, itemElement, NameClick)
     })
@@ -136,7 +135,7 @@ function editItem(item, itemElement, NameClick) {
 }
 
 
-
+// function called when deleting items
 function remove(item, itemElement) {
     viewer.close();
     inventory.removeChild(itemElement);
@@ -144,17 +143,21 @@ function remove(item, itemElement) {
     localStorage.setItem("items", JSON.stringify(items))
 }
 
+// adding new items
 addButton.addEventListener("click", () => {
     creator.showModal()
-    document.querySelector("#item-form").innerHTML = Orginal_Form
+    document.querySelector("#item-form").innerHTML = Orginal_Form //resets the form to the original form with no added properties
     newPropBtn = document.querySelector("#new-property")
     newPropBtn.addEventListener("click", newProperty)
 });
+
+// when the form is submitted
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 
     let name = document.querySelector("#Name")
-
+    
+    // makes sure there are no duplicate items (really just to prevent errors)
     if (items.hasOwnProperty(name.value)) {
         name.value = "Can not have duplicate items!"
         return;
@@ -173,9 +176,9 @@ form.addEventListener("submit", function (event) {
 
     data["checked"] = false
 
-    items[(itemData.get("Name")).replace(/\s+/g, "-")] = data;
+    items[(itemData.get("Name"))] = data;
     localStorage.setItem("items", JSON.stringify(items))
-    addItem((itemData.get("Name")).replace(/\s+/g, "-"));
+    addItem((itemData.get("Name")));
     creator.close();
 })
 form.addEventListener("reset", () => {
@@ -183,6 +186,7 @@ form.addEventListener("reset", () => {
     form.reset();
 });
 
+// gets the info of each item and turns it into html
 function getInfo(item) {
     let returnString = '<h2>Item Info</h2>';
     if (!items[item]) {
@@ -196,6 +200,7 @@ function getInfo(item) {
 };
 
 
+// function for adding properties when making a new item
 function newProperty() {
     PropertyDiv.innerHTML = '<label for="new">New Property:</label> <input type="text" id="new" name="new" required> <button id = "addProperty">Add</button>'
     AddPropBtn = document.querySelector("#addProperty")
@@ -216,6 +221,7 @@ function newProperty() {
     })
 };
 
+// function for adding properites when editing an item
 function addPropToEditor(addDiv) {
     addDiv.innerHTML = '<label for="new">New Property:</label> <input type="text" id="newProp" name="newProp" required> <button id = "newProperty">Add</button>'
     EditorNewBTN = document.querySelector("#newProperty")
@@ -240,6 +246,7 @@ function addPropToEditor(addDiv) {
     })
 }
 
+// adds all items in storage into the inventory
 function onLoad() {
   const data = JSON.parse(localStorage.getItem("items")) || {};
 
@@ -249,12 +256,14 @@ function onLoad() {
   }
 };
 
+// adds a property into a form
 function createProp (NewPropValue, div) {
    const prop = document.createElement("div");
    prop.innerHTML = `<label for="${NewPropValue}:">${NewPropValue}:</label> <br> <input type="text" id="${NewPropValue}" name="${NewPropValue}"> <br> <br>`
    document.querySelector(div).appendChild(prop);
 }
 
+// shortens the names (just for the item div) for items that are too long
 function shorten(word) {
     if (word.length > 49) {
     return word.slice(0, 46) + "..."
@@ -263,6 +272,7 @@ function shorten(word) {
     }
 }
 
+// strikethroughs items
 function strikeThrough(div, strike) {
     div.style.textDecoration = strike ? "line-through" : "none";
 }
