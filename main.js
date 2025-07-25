@@ -93,7 +93,8 @@ function editItem(item, itemElement, NameClick) {
         }
     };
     HTMLstring += `<span id = "new-editor-props"></span> <button id = "save-edits">Save</button> <button id = "close-editor">Cancel</button> </form> <br> <div id = "add-div"> <button id = "add-editor-property">New property</button> </div>`;
-    document.querySelector("#editor").innerHTML = HTMLstring;
+    document.querySelector("#editor").innerHTML = HTMLstring; // set the editor div to have the editor form
+    // adding new properties to items
     let addDiv = document.querySelector("#add-div")
     EditorAddBTN = document.querySelector("#add-editor-property")
     EditorAddBTN.addEventListener("click", () => {
@@ -105,10 +106,11 @@ function editItem(item, itemElement, NameClick) {
         EditorForm.reset()
         resetBTNs(item, itemElement)
     });
+    // once the editor form is submitted
     EditorForm.addEventListener("submit", (event) => {
         event.preventDefault();
         let NameInput = document.querySelector("#Edit-Name")
-        if (!NameInput.value || !NameInput.value.trim()) {
+        if (!NameInput.value || !NameInput.value.trim()) { // Makes sure the user doesnt enter all spaces
             NameInput.value = "Please enter a valid name!"
             return;
         }
