@@ -7,11 +7,12 @@
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
-        <div id = "inventory">
+        <div id = "inventory"> <!-- Div to hold all item elements -->
             <h1>Your inventory</h1>
             <div class = "item" id = "add-button"> + New item</div>
+            <!-- New items go here -->
         </div>
-        <dialog id = "item-creator">
+        <dialog id = "item-creator"> <!-- Item creator Dialog -->
             <div class = "dialog">
             <h2>Add item info...</h2>
             <h4>(Any blank properties will be ignored)</h4>
@@ -24,7 +25,7 @@
                 <br>
                 <label for="Description">Description:</label>
                 <textarea id="Description" name="Description"></textarea>
-                <span id = "new-properties"></span>
+                <span id = "new-properties"><!--User created properties go here --></span>
                 <button type = "submit">Save</button>
                 <button id = "rest" type="reset">Cancel</button>
             </form>
@@ -34,15 +35,17 @@
             </div>
             </div>
         </dialog>
-        <dialog id = "item-viewer">
+        <dialog id = "item-viewer"> <!-- Item veiwer dialog -->
             <div id = "item-info" class = "dialog">
+                <!-- Item properties go here-->
             </div>
         </dialog>
-        <dialog id = "item-editor">
+        <dialog id = "item-editor"> <!-- Item editor dialog -->
             <div id = "editor" class = "dialog">
+                <!-- Item properties to edit go here -->
             </div>
         </dialog>
-        <dialog id = "delete">
+        <dialog id = "delete"> <!-- Pop-up for user to confirm their delete -->
             <div id = "delete-div" class = "dialog">
                 <span id = "delete-text"></span>
                 <br>
